@@ -24,6 +24,29 @@ const createCurrentUser = async (req: Request, res: Response) => {
     }
 }
 
+const updateCurrentUser = async(req: Request, res: Response) =>{
+    try {
+        const {name, RoomNo, Hostel} = req.body;
+
+        const user = await User.findById(req.userId);
+
+        if(!user){
+        return res.status(404).json({message: "User not found"});
+        }
+        user.name = name;
+        user.RoomNo = RoomNo;
+        user.Hostel = Hostel;
+
+        await user.save();
+
+        res.send(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Error updating user"});
+    }
+}
+
 export default {
-    createCurrentUser
+    createCurrentUser,
+    updateCurrentUser,
 }
