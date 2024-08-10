@@ -10,7 +10,11 @@ export default function UserProfilePage() {
   if(isGetLoading){
     return <span>Loading...</span>
   }
+
+  if(!currentUser){
+    return <span>Unable to Load user Profile</span>
+  }
   return (
-    <UserProfileForm onSave={updateUser} isLoading={isUpdateLoading}></UserProfileForm>
+    <UserProfileForm currentUser={currentUser} onSave={updateUser} isLoading={isUpdateLoading}></UserProfileForm>
   )
 }
