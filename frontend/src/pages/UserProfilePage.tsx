@@ -1,8 +1,9 @@
+import { useUpdateMyUser } from '@/api/MyUserApi'
 import { UserProfileForm } from '@/form/user-profile-form/UserProfile'
-import React from 'react'
 
 export default function UserProfilePage() {
+  const {updateUser, isLoading} = useUpdateMyUser();
   return (
-    <UserProfileForm></UserProfileForm>
+    <UserProfileForm onSave={updateUser} isLoading={isLoading}></UserProfileForm>
   )
 }
